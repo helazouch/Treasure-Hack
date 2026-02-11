@@ -63,7 +63,6 @@ h2 {
     line-height: 1.5;
 }
 
-/* Word Bank Styles */
 .word-bank-section {
     margin-bottom: 30px;
 }
@@ -116,7 +115,6 @@ h2 {
     cursor: grabbing;
 }
 
-/* Drop Zone Styles */
 .drop-zone-section {
     margin-bottom: 30px;
 }
@@ -165,7 +163,6 @@ h2 {
     border-color: #000;
 }
 
-/* Controls */
 .controls {
     display: flex;
     gap: 15px;
@@ -219,7 +216,6 @@ button:active {
     color: #fff;
 }
 
-/* Modal Styles */
 .modal {
     position: fixed;
     top: 0;
@@ -281,7 +277,7 @@ button:active {
 }
 
 .modal-body p {
-    font-size: 0.5em;
+    font-size: 0.8em;
     color: #000;
     margin-bottom: 20px;
     line-height: 1.6;
@@ -311,7 +307,6 @@ button:active {
     color: #000;
 }
 
-/* Footer */
 footer {
     text-align: center;
     margin-top: 30px;
@@ -321,7 +316,6 @@ footer {
     border-top: 4px dashed #000;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 20px;

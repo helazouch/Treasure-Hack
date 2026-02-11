@@ -1,4 +1,3 @@
-// Main application logic
 class TreasureHuntGame {
     constructor() {
         this.wordBank = document.getElementById('wordBank');
@@ -15,23 +14,18 @@ class TreasureHuntGame {
     }
 
     async init() {
-        // Shuffle words for randomness
         const shuffledWords = this.shuffleArray([...CONFIG.words]);
         
-        // Create word elements
         shuffledWords.forEach((word, index) => {
             this.createWordElement(word, index);
         });
 
-        // Create drop slots
-        for (let i = 0; i < CONFIG.words.length; i++) {
+        for (let i = 0; i < CONFIG.answerLength; i++) {
             this.createDropSlot(i);
         }
 
-        // Make word bank accept drops
         this.setupWordBankDropZone();
 
-        // Add event listeners
         this.submitBtn.addEventListener('click', () => this.checkAnswer());
         this.resetBtn.addEventListener('click', () => this.reset());
         this.closeModalBtn.addEventListener('click', () => this.closeModal());
@@ -45,7 +39,6 @@ class TreasureHuntGame {
         wordEl.dataset.word = word;
         wordEl.dataset.id = `word-${index}`;
 
-        // Drag events
         wordEl.addEventListener('dragstart', (e) => this.handleDragStart(e));
         wordEl.addEventListener('dragend', (e) => this.handleDragEnd(e));
 
@@ -58,7 +51,6 @@ class TreasureHuntGame {
         slot.dataset.position = position + 1;
         slot.dataset.slotIndex = position;
 
-        // Drop events
         slot.addEventListener('dragover', (e) => this.handleDragOver(e));
         slot.addEventListener('dragleave', (e) => this.handleDragLeave(e));
         slot.addEventListener('drop', (e) => this.handleDrop(e));
@@ -104,19 +96,15 @@ class TreasureHuntGame {
         const slot = e.currentTarget;
         slot.classList.remove('drag-over');
 
-        // Check if slot is empty
         if (!slot.querySelector('.word') && this.draggedElement) {
-            // Remove from old parent
             const oldParent = this.draggedElement.parentNode;
             if (oldParent.classList.contains('drop-slot')) {
                 oldParent.classList.remove('filled');
             }
 
-            // Add to new slot
             slot.appendChild(this.draggedElement);
             slot.classList.add('filled');
             
-            // Update current answer
             this.updateCurrentAnswer();
         }
 
@@ -124,7 +112,6 @@ class TreasureHuntGame {
     }
 
     setupWordBankDropZone() {
-        // Allow dropping words back to word bank
         this.wordBank.addEventListener('dragover', (e) => {
             if (e.preventDefault) {
                 e.preventDefault();
@@ -147,16 +134,13 @@ class TreasureHuntGame {
             this.wordBank.classList.remove('drag-over');
             
             if (this.draggedElement) {
-                // Remove from old parent (drop slot)
                 const oldParent = this.draggedElement.parentNode;
                 if (oldParent.classList.contains('drop-slot')) {
                     oldParent.classList.remove('filled');
                 }
                 
-                // Add back to word bank
                 this.wordBank.appendChild(this.draggedElement);
                 
-                // Update current answer
                 this.updateCurrentAnswer();
             }
             
@@ -181,30 +165,24 @@ class TreasureHuntGame {
     async checkAnswer() {
         this.updateCurrentAnswer();
         
-        // Check if all slots are filled
         if (this.currentAnswer.includes(null)) {
             this.showModal('Incomplete!', 'Please fill all slots before submitting.', null);
             return;
         }
 
-        // Create answer string
         const answerString = this.currentAnswer.join(' ');
         
-        // Hash the answer
         const answerHash = await this.hashString(answerString);
         
-        // Check against stored hash
         if (answerHash === CONFIG.correctAnswerHash) {
-            // Decrypt flag using the correct answer as the key
             const flag = await this.decryptFlag(CONFIG.encryptedFlag, answerString);
-            this.showModal('🎉 Congratulations! 🎉', 'You found the treasure!', flag);
+            this.showModal('🎉 Congratulations! 🎉', 'You found the flag!', flag);
         } else {
             this.showModal('❌ Incorrect', 'That\'s not the right combination. Try again!', null);
         }
     }
 
     async hashString(str) {
-        // Use SHA-256 to hash the string
         const encoder = new TextEncoder();
         const data = encoder.encode(str);
         const hashBuffer = await crypto.subtle.digest('SHA-256', data);
@@ -214,9 +192,7 @@ class TreasureHuntGame {
     }
 
     async decryptFlag(encryptedData, key) {
-        // Decrypt flag using AES-256-CBC with the correct answer as key
         try {
-            // Split IV and encrypted data
             const parts = encryptedData.split(':');
             if (parts.length !== 2) {
                 return 'FLAG_DECRYPT_ERROR';
@@ -225,12 +201,10 @@ class TreasureHuntGame {
             const iv = this.hexToBuffer(parts[0]);
             const encrypted = this.hexToBuffer(parts[1]);
             
-            // Derive key from answer using SHA-256
             const encoder = new TextEncoder();
             const keyData = encoder.encode(key);
             const keyHash = await crypto.subtle.digest('SHA-256', keyData);
             
-            // Import key for decryption
             const cryptoKey = await crypto.subtle.importKey(
                 'raw',
                 keyHash,
@@ -239,14 +213,12 @@ class TreasureHuntGame {
                 ['decrypt']
             );
             
-            // Decrypt
             const decrypted = await crypto.subtle.decrypt(
                 { name: 'AES-CBC', iv: iv },
                 cryptoKey,
                 encrypted
             );
             
-            // Convert to string
             const decoder = new TextDecoder();
             return decoder.decode(decrypted);
         } catch (e) {
@@ -283,13 +255,11 @@ class TreasureHuntGame {
     }
 
     reset() {
-        // Move all words back to word bank
         const words = this.dropZone.querySelectorAll('.word');
         words.forEach(word => {
             this.wordBank.appendChild(word);
         });
 
-        // Clear all slots
         const slots = this.dropZone.querySelectorAll('.drop-slot');
         slots.forEach(slot => {
             slot.classList.remove('filled');
@@ -308,7 +278,6 @@ class TreasureHuntGame {
     }
 }
 
-// Initialize the game when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new TreasureHuntGame();
 });

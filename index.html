@@ -9,34 +9,28 @@
 <body>
     <div class="container">
         <header>
-            <h1>🏴‍☠️ Treasure Hunt Challenge</h1>
+            <h1>Treasure Hack </h1>
             <p class="subtitle">Arrange the words in the correct order to reveal the flag!</p>
         </header>
 
         <main>
-            <!-- Word Bank - Source of draggable words -->
             <section class="word-bank-section">
                 <h2>Word Bank</h2>
                 <div id="wordBank" class="word-bank">
-                    <!-- Words will be dynamically inserted here -->
                 </div>
             </section>
 
-            <!-- Drop Zone - Where words are arranged -->
             <section class="drop-zone-section">
                 <h2>Arrange Words Here</h2>
                 <div id="dropZone" class="drop-zone">
-                    <!-- Drop slots will be dynamically created here -->
                 </div>
             </section>
 
-            <!-- Controls -->
             <div class="controls">
                 <button id="submitBtn" class="submit-btn">Submit Answer</button>
                 <button id="resetBtn" class="reset-btn">Reset</button>
             </div>
 
-            <!-- Result Modal -->
             <div id="resultModal" class="modal hidden">
                 <div class="modal-content">
                     <div class="modal-header">
