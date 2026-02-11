@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Hunt - Word Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏴‍☠️ Treasure Hunt Challenge</h1>
+            <p class="subtitle">Arrange the words in the correct order to reveal the treasure!</p>
+        </header>
+
+        <main>
+            <!-- Word Bank - Source of draggable words -->
+            <section class="word-bank-section">
+                <h2>Word Bank</h2>
+                <div id="wordBank" class="word-bank">
+                    <!-- Words will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Drop Zone - Where words are arranged -->
+            <section class="drop-zone-section">
+                <h2>Arrange Words Here</h2>
+                <div id="dropZone" class="drop-zone">
+                    <!-- Drop slots will be dynamically created here -->
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="submitBtn" class="submit-btn">Submit Answer</button>
+                <button id="resetBtn" class="reset-btn">Reset</button>
+            </div>
+
+            <!-- Result Modal -->
+            <div id="resultModal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalTitle">Congratulations!</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalMessage"></p>
+                        <div id="flagDisplay" class="flag-display"></div>
+                    </div>
+                    <button id="closeModal" class="close-btn">Close</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Good luck, treasure hunter! 🗺️</p>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
