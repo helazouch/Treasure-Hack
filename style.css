@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: white;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -17,10 +17,11 @@ body {
 .container {
     background: white;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     max-width: 900px;
     width: 100%;
     padding: 40px;
+    border: 1px solid #e0e0e0;
 }
 
 header {
@@ -43,6 +44,13 @@ h2 {
     color: #444;
     font-size: 1.5em;
     margin-bottom: 15px;
+}
+
+.hint {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    font-style: italic;
 }
 
 /* Word Bank Styles */
@@ -72,6 +80,21 @@ h2 {
     font-size: 1.1em;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+
+.word:hover::after {
+    content: ' ✕';
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.drop-slot .word {
+    cursor: pointer;
+}
+
+.drop-slot .word:hover {
+    opacity: 0.9;
+    transform: translateY(-2px) scale(1.02);
 }
 
 .word:hover {

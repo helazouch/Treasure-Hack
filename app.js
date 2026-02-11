@@ -45,6 +45,9 @@ class TreasureHuntGame {
         // Drag events
         wordEl.addEventListener('dragstart', (e) => this.handleDragStart(e));
         wordEl.addEventListener('dragend', (e) => this.handleDragEnd(e));
+        
+        // Double-click to return word to bank
+        wordEl.addEventListener('dblclick', (e) => this.returnWordToBank(e));
 
         this.wordBank.appendChild(wordEl);
     }
@@ -118,6 +121,18 @@ class TreasureHuntGame {
         }
 
         return false;
+    }
+
+    returnWordToBank(e) {
+        const word = e.target;
+        const parent = word.parentNode;
+        
+        // Only return if word is in a drop slot
+        if (parent.classList.contains('drop-slot')) {
+            parent.classList.remove('filled');
+            this.wordBank.appendChild(word);
+            this.updateCurrentAnswer();
+        }
     }
 
     updateCurrentAnswer() {

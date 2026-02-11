@@ -59,6 +59,7 @@ node build.js
 ```
 
 This will:
+
 - Hash your correct answer with SHA-256
 - Encrypt your flag with AES-256 using the answer as the key
 - Generate `config.js` with the secure data
@@ -119,12 +120,14 @@ treasure-hunt/
 ### Change the Words and Answer
 
 Edit `.env`:
+
 ```env
 CORRECT_ANSWER=new word order here
 WORDS=new,word,order,here
 ```
 
 Then rebuild:
+
 ```bash
 npm run build
 ```
@@ -132,6 +135,7 @@ npm run build
 ### Change the Colors
 
 Edit `style.css` and modify the gradient colors:
+
 ```css
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 ```
@@ -151,15 +155,19 @@ Simply add more words to the `WORDS` field in `.env` (comma-separated), and incl
 ## 🐛 Troubleshooting
 
 **Problem**: Config.js not found
+
 - **Solution**: Run `npm run build` to generate it from .env
 
 **Problem**: Words don't match answer
+
 - **Solution**: Ensure WORDS in .env contains exactly the same words as CORRECT_ANSWER
 
 **Problem**: Flag not showing
+
 - **Solution**: Check that your answer exactly matches CORRECT_ANSWER (case-sensitive, spaces matter)
 
 **Problem**: .env committed to GitHub
+
 - **Solution**: If accidentally committed, remove from git history:
   ```bash
   git rm --cached .env
