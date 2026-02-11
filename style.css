@@ -4,53 +4,63 @@
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: white;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    background: #000;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
 
 .container {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    border: 4px solid #000;
     max-width: 900px;
     width: 100%;
-    padding: 40px;
-    border: 1px solid #e0e0e0;
+    padding: 30px;
+    box-shadow: 8px 8px 0 #000;
 }
 
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 4px dashed #000;
 }
 
 h1 {
-    color: #333;
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    color: #000;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .subtitle {
-    color: #666;
-    font-size: 1.1em;
+    color: #000;
+    font-size: 0.5em;
+    line-height: 1.6;
 }
 
 h2 {
-    color: #444;
-    font-size: 1.5em;
+    color: #000;
+    font-size: 0.8em;
     margin-bottom: 15px;
+    text-transform: uppercase;
 }
 
 .hint {
-    color: #666;
-    font-size: 0.9em;
+    color: #000;
+    font-size: 0.4em;
     margin-bottom: 10px;
-    font-style: italic;
+    line-height: 1.5;
 }
 
 /* Word Bank Styles */
@@ -61,49 +71,44 @@ h2 {
 .word-bank {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    gap: 10px;
+    padding: 15px;
+    background: #fff;
     min-height: 100px;
-    border: 2px dashed #ccc;
+    border: 3px dashed #000;
+    transition: all 0.1s ease;
+}
+
+.word-bank.drag-over {
+    background: #000;
+    border-color: #fff;
 }
 
 .word {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: 3px solid #000;
     cursor: grab;
     user-select: none;
-    font-weight: 600;
-    font-size: 1.1em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.word:hover::after {
-    content: ' ✕';
-    font-size: 0.9em;
-    opacity: 0.8;
-}
-
-.drop-slot .word {
-    cursor: pointer;
-}
-
-.drop-slot .word:hover {
-    opacity: 0.9;
-    transform: translateY(-2px) scale(1.02);
+    font-weight: bold;
+    font-size: 0.6em;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.1s ease;
+    text-transform: uppercase;
 }
 
 .word:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #000;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
 }
 
 .word:active {
     cursor: grabbing;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .word.dragging {
@@ -119,26 +124,24 @@ h2 {
 .drop-zone {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-    background: #fff9e6;
-    border-radius: 10px;
+    gap: 10px;
+    padding: 15px;
+    background: #fff;
     min-height: 120px;
-    border: 3px dashed #ffc107;
+    border: 3px solid #000;
 }
 
 .drop-slot {
     min-width: 120px;
     min-height: 60px;
-    background: white;
-    border: 2px dashed #ddd;
-    border-radius: 8px;
+    background: #fff;
+    border: 3px dashed #000;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 .drop-slot::before {
@@ -146,20 +149,20 @@ h2 {
     position: absolute;
     top: 2px;
     left: 5px;
-    font-size: 0.7em;
-    color: #999;
+    font-size: 0.4em;
+    color: #000;
     font-weight: bold;
 }
 
 .drop-slot.drag-over {
-    background: #e8f5e9;
-    border-color: #4caf50;
+    background: #000;
+    border-color: #fff;
     transform: scale(1.05);
 }
 
 .drop-slot.filled {
     border-style: solid;
-    border-color: #667eea;
+    border-color: #000;
 }
 
 /* Controls */
@@ -171,38 +174,49 @@ h2 {
 }
 
 button {
-    padding: 15px 40px;
-    font-size: 1.1em;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
+    padding: 12px 30px;
+    font-size: 0.6em;
+    font-weight: bold;
+    border: 3px solid #000;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
+    box-shadow: 4px 4px 0 #000;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    text-transform: uppercase;
+    background: #fff;
+    color: #000;
 }
 
-.submit-btn {
-    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-    color: white;
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.reset-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-    color: white;
-}
-
-.reset-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+button:hover {
+    background: #000;
+    color: #fff;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
 }
 
 button:active {
-    transform: translateY(0);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+.submit-btn {
+    background: #000;
+    color: #fff;
+}
+
+.submit-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+.reset-btn {
+    background: #fff;
+    color: #000;
+}
+
+.reset-btn:hover {
+    background: #000;
+    color: #fff;
 }
 
 /* Modal Styles */
@@ -212,12 +226,12 @@ button:active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.2s ease;
 }
 
 .modal.hidden {
@@ -234,13 +248,13 @@ button:active {
 }
 
 .modal-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
+    background: #fff;
+    border: 4px solid #000;
+    padding: 30px;
     max-width: 500px;
     width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.3s ease;
+    box-shadow: 8px 8px 0 #000;
+    animation: slideUp 0.2s ease;
     text-align: center;
 }
 
@@ -256,9 +270,10 @@ button:active {
 }
 
 .modal-header h2 {
-    color: #4caf50;
-    font-size: 2em;
+    color: #000;
+    font-size: 1em;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .modal-body {
@@ -266,40 +281,44 @@ button:active {
 }
 
 .modal-body p {
-    font-size: 1.2em;
-    color: #666;
+    font-size: 0.5em;
+    color: #000;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .flag-display {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    background: #000;
+    color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    font-size: 1.5em;
+    border: 3px solid #000;
+    font-size: 0.7em;
     font-weight: bold;
-    color: #333;
     word-break: break-all;
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    box-shadow: inset 4px 4px 0 rgba(255, 255, 255, 0.2);
     margin-top: 15px;
+    font-family: 'Courier New', monospace;
 }
 
 .close-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: #000;
+    color: #fff;
     margin-top: 20px;
 }
 
 .close-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    color: #000;
 }
 
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 40px;
-    color: #999;
-    font-size: 1.1em;
+    margin-top: 30px;
+    color: #000;
+    font-size: 0.5em;
+    padding-top: 20px;
+    border-top: 4px dashed #000;
 }
 
 /* Responsive Design */
@@ -309,12 +328,12 @@ footer {
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1em;
     }
 
     .word {
-        padding: 10px 20px;
-        font-size: 1em;
+        padding: 8px 16px;
+        font-size: 0.5em;
     }
 
     .controls {
@@ -323,5 +342,6 @@ footer {
 
     button {
         width: 100%;
+        font-size: 0.5em;
     }
 }

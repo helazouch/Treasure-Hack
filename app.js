@@ -28,6 +28,9 @@ class TreasureHuntGame {
             this.createDropSlot(i);
         }
 
+        // Make word bank accept drops
+        this.setupWordBankDropZone();
+
         // Add event listeners
         this.submitBtn.addEventListener('click', () => this.checkAnswer());
         this.resetBtn.addEventListener('click', () => this.reset());
@@ -45,9 +48,6 @@ class TreasureHuntGame {
         // Drag events
         wordEl.addEventListener('dragstart', (e) => this.handleDragStart(e));
         wordEl.addEventListener('dragend', (e) => this.handleDragEnd(e));
-        
-        // Double-click to return word to bank
-        wordEl.addEventListener('dblclick', (e) => this.returnWordToBank(e));
 
         this.wordBank.appendChild(wordEl);
     }
@@ -123,16 +123,45 @@ class TreasureHuntGame {
         return false;
     }
 
-    returnWordToBank(e) {
-        const word = e.target;
-        const parent = word.parentNode;
-        
-        // Only return if word is in a drop slot
-        if (parent.classList.contains('drop-slot')) {
-            parent.classList.remove('filled');
-            this.wordBank.appendChild(word);
-            this.updateCurrentAnswer();
-        }
+    setupWordBankDropZone() {
+        // Allow dropping words back to word bank
+        this.wordBank.addEventListener('dragover', (e) => {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            this.wordBank.classList.add('drag-over');
+            return false;
+        });
+
+        this.wordBank.addEventListener('dragleave', (e) => {
+            this.wordBank.classList.remove('drag-over');
+        });
+
+        this.wordBank.addEventListener('drop', (e) => {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            e.preventDefault();
+            
+            this.wordBank.classList.remove('drag-over');
+            
+            if (this.draggedElement) {
+                // Remove from old parent (drop slot)
+                const oldParent = this.draggedElement.parentNode;
+                if (oldParent.classList.contains('drop-slot')) {
+                    oldParent.classList.remove('filled');
+                }
+                
+                // Add back to word bank
+                this.wordBank.appendChild(this.draggedElement);
+                
+                // Update current answer
+                this.updateCurrentAnswer();
+            }
+            
+            return false;
+        });
     }
 
     updateCurrentAnswer() {
