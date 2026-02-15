@@ -1,37 +1,40 @@
 const CONFIG = {
     words: [
+    "fitouriya",
+    "février",
+    "siamese",
+    "miami",
+    "mahboula",
     "borni",
-    "always",
-    "uses",
-    "public",
-    "wifi",
+    "fitouriya",
+    "miami",
+    "siamese",
+    "persian",
+    "bengal",
+    "mahboula",
+    "février",
+    "juillet",
+    "octobre",
+    "turquoise",
+    "steps",
     "coffee",
-    "password",
-    "secure",
-    "network",
-    "home",
-    "never",
-    "sometimes",
-    "hacker",
-    "analyst",
-    "private",
-    "vpn",
-    "router",
-    "laptop",
-    "security",
-    "office",
-    "cafe",
-    "open",
-    "hidden",
-    "connect",
-    "encrypted"
+    "beach",
+    "coast",
+    "waves",
+    "maldives",
+    "hawaii",
+    "moments",
+    "together",
+    "date",
+    "first",
+    "horizon"
 ],
     
     answerLength: 5,
     
-    correctAnswerHash: '4d348072897c9ba5dac045a8e3369b5701ecf4ac4ca4beb797ea138ebd4aee95',
+    correctAnswerHash: 'ce5ba3779b4820c7951f0ecf861b2b3e16e6fe34ce70ef90dda14a5559ce4356',
     
-    encryptedFlag: '09782fb2ea6423789266471dcc7c9d37:6677c76f4ebde7c03fb8a58232c62a907fcd07b4eec5afc8c80200b5f3e1eb640f8158e7c25a6ac81545a331d82d3586'
+    encryptedFlag: '7cb02889324b8ad25e41683abb1c02c7:9f30a8d90995c36f43509120a9c665104be2ca6080f0dd02e874a1d74b35488996a447c34c878aa0fd8629f2e8b73c97'
 };
 
 Object.freeze(CONFIG);
